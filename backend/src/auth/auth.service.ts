@@ -27,11 +27,9 @@ export class AuthService {
           expiresIn: '1h',
           secret: process.env.jwtSecretKey,
         }),
-      },
-      backendToken: {
-        accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '1h',
-          secret: process.env.jwtSecretKey,
+        refreshToken: await this.jwtService.signAsync(payload, {
+          expiresIn: '30d',
+          secret: process.env.jwtRefreshToken,
         }),
       },
     };
