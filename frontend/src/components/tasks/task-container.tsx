@@ -1,44 +1,59 @@
 'use client';
 import { FC, ReactNode, useState } from 'react';
-import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import TaskItem from './task-item';
 
 interface TaskContainerProps {
-	list: { id: string; content: string };
+	data: {
+		id: string;
+		content: string;
+		cards: { id: string; content: string }[];
+	};
 	index: number;
 }
 
-const TaskContainer: FC<TaskContainerProps> = ({ list, index }) => {
-	const [data, setData] = useState([
-		{ id: '1', content: '1' },
-		{ id: '2', content: '2' },
-		{ id: '3', content: '3' }
-	]);
-
+const TaskContainer: FC<TaskContainerProps> = ({ data, index }) => {
 	return (
-		<Droppable
-			droppableId={list.id}
-			type='card'
+		<Draggable
+			draggableId={data.id}
+			index={index}
 		>
 			{provided => (
 				<div
-					{...provided.droppableProps}
+					{...provided.draggableProps}
 					ref={provided.innerRef}
-					className='flex flex-col m-3 w-72 h-full border border-zinc-700 rounded'
+					className='flex m-3 w-72 h-full border border-zinc-700 rounded'
 				>
-					<div className='flex p-3'>{list.content}</div>
-
-					{data.map((task, index) => (
-						<TaskItem
-							index={index}
-							key={task.id}
-							data={task}
-						/>
-					))}
-					{provided.placeholder}
+					<div
+						{...provided.dragHandleProps}
+						className='flex flex-col p-3 w-full h-full'
+					>
+						<div>{data.content}</div>
+						<Droppable
+							droppableId={data.id}
+							type='card'
+						>
+							{provided => (
+								<div
+									ref={provided.innerRef}
+									{...provided.droppableProps}
+									className='mx-1 px-1 py-0.5 flex flex-col gap-y-2 h-full bg-gray-400'
+								>
+									{data.cards.map((card, index) => (
+										<TaskItem
+											index={index}
+											key={card.id}
+											data={card}
+										/>
+									))}
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</div>
 				</div>
 			)}
-		</Droppable>
+		</Draggable>
 	);
 };
 
