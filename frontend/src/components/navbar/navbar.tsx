@@ -1,6 +1,7 @@
 import { COLORS } from '@/constants/colors.constants';
 import { LayoutDashboard } from 'lucide-react';
 import { FC } from 'react';
+import LoginButton from '../login-btn/login-btn';
 
 interface NavbarProps {}
 
@@ -12,6 +13,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
 				size={26}
 			/>
 			<span className='px-1 text-lg'>TaskFlow</span>
+			<LoginButton />
 		</div>
 	);
 };
