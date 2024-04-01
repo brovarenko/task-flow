@@ -29,7 +29,7 @@ export class AuthService {
         }),
         refreshToken: await this.jwtService.signAsync(payload, {
           expiresIn: '30d',
-          secret: process.env.jwtRefreshToken,
+          secret: process.env.jwtRefreshTokenKey,
         }),
       },
     };
@@ -58,7 +58,7 @@ export class AuthService {
       }),
       refreshToken: await this.jwtService.signAsync(payload, {
         expiresIn: '30d',
-        secret: process.env.jwtRefreshToken,
+        secret: process.env.jwtRefreshTokenKey,
       }),
     };
   }

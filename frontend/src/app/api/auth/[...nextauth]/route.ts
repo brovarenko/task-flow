@@ -46,24 +46,27 @@ export const authOptions: NextAuthOptions = {
 						'Content-Type': 'application/json'
 					}
 				});
-				if (res.status == 401) {
-					console.log(res.statusText);
 
-					return null;
-				}
 				const user = await res.json();
-				return user;
+
+				if (res.ok && user) {
+					return user;
+				}
+				// Return null if user data could not be retrieved
+				return null;
 			}
 		})
 	],
 
 	callbacks: {
 		async jwt({ token, user }) {
+			console.log({ token, user });
 			if (user) return { ...token, ...user };
 
-			if (new Date().getTime() < token.backendTokens.expiresIn) return token;
+			// if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
-			return await refreshToken(token);
+			// return await refreshToken(token);
+			return token;
 		},
 
 		async session({ token, session }) {
