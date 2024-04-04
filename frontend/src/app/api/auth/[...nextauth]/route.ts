@@ -50,6 +50,7 @@ export const authOptions: NextAuthOptions = {
 				const user = await res.json();
 
 				if (res.ok && user) {
+					console.log(user);
 					return user;
 				}
 				// Return null if user data could not be retrieved
@@ -59,17 +60,20 @@ export const authOptions: NextAuthOptions = {
 	],
 
 	callbacks: {
+		async redirect({ url, baseUrl }) {
+			return `${baseUrl}/board`;
+		},
 		async jwt({ token, user }) {
-			console.log({ token, user });
 			if (user) return { ...token, ...user };
+			console.log(token);
+			console.log(user);
+			if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
-			// if (new Date().getTime() < token.backendTokens.expiresIn) return token;
-
-			// return await refreshToken(token);
-			return token;
+			return await refreshToken(token);
 		},
 
 		async session({ token, session }) {
+			console.log(`session`);
 			session.user = token.user;
 			session.backendTokens = token.backendTokens;
 

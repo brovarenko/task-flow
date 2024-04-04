@@ -26,13 +26,14 @@ export class AuthService {
       user,
       backendToken: {
         accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '1h',
+          expiresIn: '2h',
           secret: process.env.jwtSecretKey,
         }),
         refreshToken: await this.jwtService.signAsync(payload, {
           expiresIn: '30d',
           secret: process.env.jwtRefreshTokenKey,
         }),
+        expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
       },
     };
   }
@@ -55,13 +56,14 @@ export class AuthService {
 
     return {
       accessToken: await this.jwtService.signAsync(payload, {
-        expiresIn: '1h',
+        expiresIn: '2h',
         secret: process.env.jwtSecretKey,
       }),
       refreshToken: await this.jwtService.signAsync(payload, {
         expiresIn: '30d',
         secret: process.env.jwtRefreshTokenKey,
       }),
+      expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
     };
   }
 }
