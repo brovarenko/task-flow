@@ -59,7 +59,7 @@ const SignupPage = () => {
 		console.log({ response });
 	}
 	return (
-		<div className='flex items-center justify-center h-full m-3'>
+		<div className='flex flex-col items-center justify-center h-full m-3'>
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}

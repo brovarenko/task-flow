@@ -19,7 +19,14 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<Providers>
-				<body className={cn(inter.className, 'dark')}>{children}</body>
+				<body
+					className={cn(
+						inter.className,
+						'dark flex flex-col items-center justify-center h-full'
+					)}
+				>
+					{children}
+				</body>
 			</Providers>
 		</html>
 	);
