@@ -1,6 +1,8 @@
+import { auth } from '@/auth';
 import Navbar from '@/components/navbar/navbar';
 import SideBar from '@/components/sidebar/sidebar';
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+
+const MainLayout = async ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className='flex flex-col h-screen'>
 			<Navbar />
