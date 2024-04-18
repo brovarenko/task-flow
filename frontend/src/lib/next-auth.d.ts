@@ -1,19 +1,18 @@
 import NextAuth from 'next-auth';
 
 // declare module 'next-auth' {
-// 	interface Session {
-// 		user: {
-// 			id: number;
-// 			email: string;
-// 			name: string;
-// 		};
-
-// 		backendTokens: {
-// 			accessToken: string;
-// 			refreshToken: string;
-// 			expiresIn: number;
-// 		};
-// 	}
+// 	// interface Session {
+// 	// 	user: {
+// 	// 		id: number;
+// 	// 		email: string;
+// 	// 		name: string;
+// 	// 	};
+// 	// 	backendTokens: {
+// 	// 		accessToken: string;
+// 	// 		refreshToken: string;
+// 	// 		expiresIn: number;
+// 	// 	};
+// 	// }
 // }
 
 import { JWT } from 'next-auth/jwt';
@@ -26,10 +25,13 @@ import { JWT } from 'next-auth/jwt';
 // 			name: string;
 // 		};
 
-// 		backendTokens: {
-// 			accessToken: string;
-// 			refreshToken: string;
-// 			expiresIn: number;
-// 		};
+// 		// backendTokens: {
+// 		// 	accessToken: string;
+// 		// 	refreshToken: string;
+// 		// 	expiresIn: number;
+// 		// };
+// 		// token: {
+// 		// 	exp: number;
+// 		// };
 // 	}
 // }
