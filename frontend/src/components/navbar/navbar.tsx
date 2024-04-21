@@ -12,7 +12,7 @@ const Navbar: FC<NavbarProps> = async ({}) => {
 	const session = await auth();
 
 	return (
-		<div className='flex alig p-3 items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
+		<div className='flex  p-3 items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
 			<LayoutDashboard
 				color={COLORS.primary}
 				size={26}
@@ -22,12 +22,12 @@ const Navbar: FC<NavbarProps> = async ({}) => {
 			{!session && <LoginButton />}
 			{session && <SignOut />}
 
-			{/* <Link
+			<Link
 				className='p-3 rounded hover:bg-emerald-600 hover:text-white hover:shadow transition '
-				href={`/user/${session?.user.id}`}
+				href={`/user/${session?.user?.id}`}
 			>
 				User Profile
-			</Link> */}
+			</Link>
 			<div className='m-2'>{session?.user?.name}</div>
 		</div>
 	);
