@@ -17,21 +17,20 @@ export class AuthService {
     const user = await this.validateUser(dto);
     const payload = { sub: user.id, username: user.name };
 
-    // return {
-    //   user,
-    //   backendToken: {
-    //     accessToken: await this.jwtService.signAsync(payload, {
-    //       expiresIn: '2h',
-    //       secret: process.env.jwtSecretKey,
-    //     }),
-    //     refreshToken: await this.jwtService.signAsync(payload, {
-    //       expiresIn: '30d',
-    //       secret: process.env.jwtRefreshTokenKey,
-    //     }),
-    //     expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
-    //   },
-    // };
-    return user;
+    return {
+      ...user,
+      backendTokens: {
+        accessToken: await this.jwtService.signAsync(payload, {
+          expiresIn: '2h',
+          secret: process.env.jwtSecretKey,
+        }),
+        refreshToken: await this.jwtService.signAsync(payload, {
+          expiresIn: '30d',
+          secret: process.env.jwtRefreshTokenKey,
+        }),
+        expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
+      },
+    };
   }
 
   async validateUser(dto: LoginDto) {

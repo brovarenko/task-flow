@@ -28,29 +28,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				});
 
 				user = await res.json();
-				console.log(user);
+
 				if (user.error) {
-					// No user found, so this is their first attempt to login
-					// meaning this is also the place you could do registration
-					throw new Error('User not found.');
+					return null;
 				}
-				//console.log(user);
-				// return user object with the their profile data
+
 				return user;
 			}
 		})
 	],
 	callbacks: {
-		jwt({ token, user }) {
+		async jwt({ token, user }) {
 			if (user) {
-				// User is available during sign-in
 				token.id = user.id;
+				return { ...token, ...user };
 			}
 			return token;
 		},
-		session({ session, token }) {
-			console.log(token.id);
-			//session.user.id = token.id;
+		async session({ session, token }) {
+			session.backendTokens = token.backendTokens;
+			if (token) {
+				session.user.id = token.id;
+			}
+
+			console.log(session);
 			return session;
 		}
 	}
