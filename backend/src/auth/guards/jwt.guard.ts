@@ -13,12 +13,16 @@ export class JwtGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
+    console.log('Cookies:', request.cookies);
+    const token = this.extractTokenFromCookie(request);
+
     if (!token) throw new UnauthorizedException();
     try {
+      console.log(token);
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.jwtSecretKey,
       });
+      //console.log(payload);
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
@@ -26,8 +30,16 @@ export class JwtGuard implements CanActivate {
     return true;
   }
 
-  private extractTokenFromHeader(request: Request) {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+  // private extractTokenFromHeader(request: Request) {
+  //   const [type, token] = request.headers.authorization?.split(' ') ?? [];
+  //   return type === 'Bearer' ? token : undefined;
+  // }
+
+  private extractTokenFromCookie(request: Request): string | undefined {
+    if (request.cookies && request.cookies.Authentication) {
+      console.log(request.cookies);
+      return request.cookies.Authentication;
+    }
+    return undefined;
   }
 }

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import Providers from '@/components/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,16 +17,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<Providers>
-				<body
-					className={cn(
-						inter.className,
-						'dark flex flex-col items-center justify-center h-full'
-					)}
-				>
-					{children}
-				</body>
-			</Providers>
+			<body
+				className={cn(
+					inter.className,
+					'dark flex flex-col items-center justify-center h-full'
+				)}
+			>
+				{children}
+			</body>
 		</html>
 	);
 }

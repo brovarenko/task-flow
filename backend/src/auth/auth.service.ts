@@ -31,16 +31,20 @@ export class AuthService {
       }),
     };
 
-    response.cookie('Authentication', backendTokens, {
-      secure: true,
+    response.cookie('Authentication', backendTokens.accessToken, {
+      secure: false,
       httpOnly: true,
-      //expires: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
-      expires: expirationDate,
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    });
+
+    response.cookie('Refresh', backendTokens.refreshToken, {
+      secure: false,
+      httpOnly: true,
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     });
 
     return {
       user,
-      backendTokens,
     };
   }
 

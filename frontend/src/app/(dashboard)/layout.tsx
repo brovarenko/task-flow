@@ -1,4 +1,3 @@
-import { auth } from '@/auth';
 import Navbar from '@/components/navbar/navbar';
 import SideBar from '@/components/sidebar/sidebar';
 
