@@ -4,20 +4,14 @@ import { FC, useEffect } from 'react';
 
 import Link from 'next/link';
 
-import { Backend_URL } from '@/lib/constants';
+import { getSessionData } from '@/lib/session';
+import SignOut from '../signout/signout';
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = async ({}) => {
-	//const session = await auth();
-	// useEffect(() => {
-	// 	const res = fetch(Backend_URL + '/user/', {
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		}
-	// 	});
-	// });
-
+	const session = await getSessionData();
+	console.log(session);
 	return (
 		<div className='flex  p-3 items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
 			<LayoutDashboard
@@ -25,22 +19,24 @@ const Navbar: FC<NavbarProps> = async ({}) => {
 				size={26}
 			/>
 			<span className='px-1 text-lg'>TaskFlow</span>
-			{/* 
-			{!session && <LoginButton />}
-			{session && <SignOut />} */}
+
+			{!session && (
+				<Link
+					className='p-3 rounded hover:bg-emerald-600 hover:text-white hover:shadow transition '
+					href={`/signin`}
+				>
+					login
+				</Link>
+			)}
+			{session && <SignOut />}
+
 			<Link
 				className='p-3 rounded hover:bg-emerald-600 hover:text-white hover:shadow transition '
-				href={`/signin`}
-			>
-				login
-			</Link>
-			{/* <Link
-				className='p-3 rounded hover:bg-emerald-600 hover:text-white hover:shadow transition '
-				href={`/user/${session?.user?.id}`}
+				href={`/user/`}
 			>
 				User Profile
-			</Link> */}
-			{/* <div className='m-2'>{session?.user?.name}</div> */}
+			</Link>
+			<div className='m-2'>{session?.username}</div>
 		</div>
 	);
 };
