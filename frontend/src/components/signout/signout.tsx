@@ -14,7 +14,7 @@ const SignOut = () => {
 	return (
 		<button
 			onClick={handleSignOut}
-			className='p-3 rounded hover:bg-red-600 hover:text-white hover:shadow transition'
+			className=' '
 		>
 			Sign Out
 		</button>

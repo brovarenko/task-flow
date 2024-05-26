@@ -36,7 +36,7 @@ export default async function login(data: z.infer<typeof formSchema>) {
 	//alert('User logged!');
 
 	setAuthCookie(res);
-	redirect(`/user/`);
+	redirect(`/home`);
 }
 
 const setAuthCookie = (response: Response) => {

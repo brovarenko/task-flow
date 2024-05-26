@@ -3,12 +3,12 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
 	let token = request.cookies.get('Authentication')?.value;
-	if (!token && !request.nextUrl.pathname.startsWith('/')) {
-		return Response.redirect(new URL('/', request.url));
+	if (!token && !request.nextUrl.pathname.startsWith('/signin')) {
+		return Response.redirect(new URL('/signin', request.url));
 	}
 	console.log(token);
 
-	//const response = NextResponse.next();
+	const response = NextResponse.next();
 	// response.cookies.set('vercel', 'fast');
 	// response.cookies.set({
 	// 	name: 'vercel',
@@ -18,7 +18,7 @@ export function middleware(request: NextRequest) {
 	// cookie = response.cookies.get('vercel');
 	// console.log(response.cookies.getAll()); // => { name: 'vercel', value: 'fast', Path: '/' }
 	//The outgoing response will have a `Set-Cookie:vercel=fast;path=/` header.
-	//return response;
+	return response;
 }
 
 export const config = {
