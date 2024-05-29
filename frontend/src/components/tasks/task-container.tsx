@@ -22,7 +22,7 @@ const TaskContainer: FC<TaskContainerProps> = ({ data, index }) => {
 				<div
 					{...provided.draggableProps}
 					ref={provided.innerRef}
-					className='flex m-3 w-72 h-full border border-zinc-700 rounded'
+					className='flex m-3 w-full  border border-zinc-700 rounded'
 				>
 					<div
 						{...provided.dragHandleProps}

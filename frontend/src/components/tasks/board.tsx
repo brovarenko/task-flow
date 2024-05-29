@@ -102,7 +102,7 @@ const Board: FC<BoardProps> = ({}) => {
 					<div
 						{...provided.droppableProps}
 						ref={provided.innerRef}
-						className='flex m-3 border border-zinc-700 rounded'
+						className='flex w-full m-3 border border-zinc-700 rounded '
 					>
 						{data.map((list, index) => (
 							<TaskContainer

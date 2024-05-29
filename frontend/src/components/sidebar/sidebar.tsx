@@ -29,7 +29,7 @@ const SideBar: FC<SideBarProps> = ({}) => {
 	};
 
 	return (
-		<aside className='flex flex-col top-14 fixed w-64 h-full border-r bg-neutral-900'>
+		<aside className='flex flex-col top-14 absolute max-w-64 w-full h-min border-r bg-neutral-900'>
 			{routes.map(route => (
 				<Button
 					key={route.href}

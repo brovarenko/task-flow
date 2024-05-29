@@ -19,7 +19,7 @@ const TaskItem: FC<TaskItemProps> = ({ data, index }) => {
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
-					className='flex items-start p-2 m-2 h-32 content-center border border-zinc-700 rounded bg-zinc-800'
+					className='flex items-start p-2 m-2 h-32 content-center border border-zinc-700 rounded bg-zinc-800 hover:border-zinc-200'
 				>
 					<div className='p-2'>
 						<Checkbox id='terms' />

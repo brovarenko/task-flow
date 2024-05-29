@@ -14,19 +14,22 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = async ({}) => {
 	const session = await getSessionData();
-	console.log(session);
+
 	return (
-		<div className='flex  p-3 items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
-			<LayoutDashboard
-				color={COLORS.primary}
-				size={26}
-			/>
-			<span className='px-1 text-lg'>TaskFlow</span>
+		<div className='flex p-3 justify-between items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
+			<div className='flex'>
+				<LayoutDashboard
+					color={COLORS.primary}
+					size={26}
+				/>
+				<span className='px-1 text-lg'>TaskFlow</span>
+			</div>
 
 			{!session && (
 				<Link
@@ -38,7 +41,12 @@ const Navbar: FC<NavbarProps> = async ({}) => {
 			)}
 
 			<DropdownMenu>
-				<DropdownMenuTrigger>{session?.username}</DropdownMenuTrigger>
+				<DropdownMenuTrigger>
+					<Avatar>
+						<AvatarImage src='https://github.com/shadcn.png' />
+						<AvatarFallback>{session?.username}</AvatarFallback>
+					</Avatar>
+				</DropdownMenuTrigger>
 				<DropdownMenuContent>
 					<DropdownMenuItem>
 						<Link href='/user'>Profile</Link>

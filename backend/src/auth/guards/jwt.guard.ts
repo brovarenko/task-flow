@@ -22,18 +22,13 @@ export class JwtGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.jwtSecretKey,
       });
-      //console.log(payload);
+
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
     }
     return true;
   }
-
-  // private extractTokenFromHeader(request: Request) {
-  //   const [type, token] = request.headers.authorization?.split(' ') ?? [];
-  //   return type === 'Bearer' ? token : undefined;
-  // }
 
   private extractTokenFromCookie(request: Request): string | undefined {
     if (request.cookies && request.cookies.Authentication) {
