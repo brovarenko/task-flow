@@ -15,4 +15,38 @@ model User {
   email String  @unique
   name  String?
   password String
+  boards   Board[]
 }
+
+model Board {
+  id        Int     @id @default(autoincrement())
+  title     String
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  lists     List[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model List {
+  id        Int     @id @default(autoincrement())
+  title     String
+  boardId   Int
+  board     Board   @relation(fields: [boardId], references: [id])
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  listId    Int
+  list      List    @relation(fields: [listId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
