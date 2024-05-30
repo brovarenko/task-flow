@@ -8,9 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 
 import { JwtService } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
+import { BoardModule } from './board/board.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UserModule, AuthModule],
+  imports: [ConfigModule.forRoot(), UserModule, AuthModule, BoardModule],
   controllers: [AppController],
   providers: [AppService, PrismaService, JwtService],
 })
