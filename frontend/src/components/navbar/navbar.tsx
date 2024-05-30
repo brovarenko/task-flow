@@ -22,7 +22,7 @@ const Navbar: FC<NavbarProps> = async ({}) => {
 	const session = await getSessionData();
 
 	return (
-		<div className='flex p-3 justify-between items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
+		<div className='flex p-3 w-full justify-between items-center h-14 z-50 bg-neutral-900 border border-b-zinc-700 shadow-sm'>
 			<div className='flex'>
 				<LayoutDashboard
 					color={COLORS.primary}

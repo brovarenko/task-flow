@@ -3,10 +3,10 @@ import SideBar from '@/components/sidebar/sidebar';
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
 	return (
-		<div className='flex flex-col'>
+		<div className='flex flex-col w-full'>
 			<Navbar />
 			<SideBar />
-			<main className='flex ml-64 h-full min-w-fit'>{children}</main>
+			<main className='flex ml-64 h-full'>{children}</main>
 		</div>
 	);
 };

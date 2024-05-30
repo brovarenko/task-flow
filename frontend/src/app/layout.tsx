@@ -20,7 +20,7 @@ export default function RootLayout({
 			<body
 				className={cn(
 					inter.className,
-					'dark flex flex-col items-center justify-center h-full'
+					'dark flex flex-col items-center justify-center h-full '
 				)}
 			>
 				{children}

@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
 	if (!token && !request.nextUrl.pathname.startsWith('/signin')) {
 		return Response.redirect(new URL('/signin', request.url));
 	}
-	console.log(token);
 
 	const response = NextResponse.next();
 	// response.cookies.set('vercel', 'fast');
